@@ -1,0 +1,205 @@
+<pre>[fmp@fedora git-notes]$ echo &quot;lolo&quot; &gt; lolo
+[fmp@fedora git-notes]$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">lolo</span>
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+[fmp@fedora git-notes]$ git add lolo
+[fmp@fedora git-notes]$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+	<span style="color:#4E9A06">new file:   lolo</span>
+
+[fmp@fedora git-notes]$ git commit -m &quot;first commit&quot;
+[master (root-commit) 9040424] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 lolo
+[fmp@fedora git-notes]$ git status
+On branch master
+nothing to commit, working tree clean
+[fmp@fedora git-notes]$ echo &quot;lola&quot; &gt; lola
+[fmp@fedora git-notes]$ git status
+On branch master
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">lola</span>
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+[fmp@fedora git-notes]$ git status -s
+<span style="color:#CC0000">??</span> lola
+[fmp@fedora git-notes]$ echo &quot;new line&quot; &gt;&gt; lolo
+[fmp@fedora git-notes]$ git status 
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	<span style="color:#CC0000">modified:   lolo</span>
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">lola</span>
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+[fmp@fedora git-notes]$ git status -s
+ <span style="color:#CC0000">M</span> lolo
+<span style="color:#CC0000">??</span> lola
+[fmp@fedora git-notes]$ echo &quot;new line&quot; &gt;&gt; lola
+[fmp@fedora git-notes]$ git status 
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	<span style="color:#CC0000">modified:   lolo</span>
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">lola</span>
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+[fmp@fedora git-notes]$ git status -s
+ <span style="color:#CC0000">M</span> lolo
+<span style="color:#CC0000">??</span> lola
+[fmp@fedora git-notes]$ git add lola 
+[fmp@fedora git-notes]$ git status -s
+<span style="color:#4E9A06">A</span>  lola
+ <span style="color:#CC0000">M</span> lolo
+[fmp@fedora git-notes]$ git status
+On branch master
+Changes to be committed:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+	<span style="color:#4E9A06">new file:   lola</span>
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	<span style="color:#CC0000">modified:   lolo</span>
+
+[fmp@fedora git-notes]$ git diff 
+<b>diff --git a/lolo b/lolo</b>
+<b>index 78167e9..264d55e 100644</b>
+<b>--- a/lolo</b>
+<b>+++ b/lolo</b>
+<span style="color:#06989A">@@ -1 +1,2 @@</span>
+ lolo
+<span style="color:#4E9A06">+new line</span>
+[fmp@fedora git-notes]$ git diff --staged
+<b>diff --git a/lola b/lola</b>
+<b>new file mode 100644</b>
+<b>index 0000000..38e519e</b>
+<b>--- /dev/null</b>
+<b>+++ b/lola</b>
+<span style="color:#06989A">@@ -0,0 +1,2 @@</span>
+<span style="color:#4E9A06">+lola</span>
+<span style="color:#4E9A06">+new line</span>
+[fmp@fedora git-notes]$ git diff --cached
+<b>diff --git a/lola b/lola</b>
+<b>new file mode 100644</b>
+<b>index 0000000..38e519e</b>
+<b>--- /dev/null</b>
+<b>+++ b/lola</b>
+<span style="color:#06989A">@@ -0,0 +1,2 @@</span>
+<span style="color:#4E9A06">+lola</span>
+<span style="color:#4E9A06">+new line</span>
+[fmp@fedora git-notes]$ git log --decorate
+<span style="color:#C4A000">commit 9040424c3e6159aaf49ccff2d556528886c3dc3e (</span><span style="color:#06989A"><b>HEAD -&gt; </b></span><span style="color:#4E9A06"><b>master</b></span><span style="color:#C4A000">)</span>
+Author: fmurphyperez &lt;fmurphyperez@gmail.com&gt;
+Date:   Sun Aug 13 18:31:15 2023 -0600
+
+    first commit
+[fmp@fedora git-notes]$ git log --decorate --stat
+<span style="color:#C4A000">commit 9040424c3e6159aaf49ccff2d556528886c3dc3e (</span><span style="color:#06989A"><b>HEAD -&gt; </b></span><span style="color:#4E9A06"><b>master</b></span><span style="color:#C4A000">)</span>
+Author: fmurphyperez &lt;fmurphyperez@gmail.com&gt;
+Date:   Sun Aug 13 18:31:15 2023 -0600
+
+    first commit
+
+ lolo | 1 <span style="color:#4E9A06">+</span>
+ 1 file changed, 1 insertion(+)
+[fmp@fedora git-notes]$ git commit -m &quot;Scond commit&quot;
+[master 0e72515] Scond commit
+ 1 file changed, 2 insertions(+)
+ create mode 100644 lola
+[fmp@fedora git-notes]$ git commit --amend
+[master 3fa794a] Second commit
+ Date: Sun Aug 13 18:47:50 2023 -0600
+ 1 file changed, 2 insertions(+)
+ create mode 100644 lola
+[fmp@fedora git-notes]$ git log --decorate --stat
+<span style="color:#C4A000">commit 3fa794abce84f7213d2346bafbffb931fd0cb6d4 (</span><span style="color:#06989A"><b>HEAD -&gt; </b></span><span style="color:#4E9A06"><b>master</b></span><span style="color:#C4A000">)</span>
+Author: fmurphyperez &lt;fmurphyperez@gmail.com&gt;
+Date:   Sun Aug 13 18:47:50 2023 -0600
+
+    Second commit
+
+ lola | 2 <span style="color:#4E9A06">++</span>
+ 1 file changed, 2 insertions(+)
+
+<span style="color:#C4A000">commit 9040424c3e6159aaf49ccff2d556528886c3dc3e</span>
+Author: fmurphyperez &lt;fmurphyperez@gmail.com&gt;
+Date:   Sun Aug 13 18:31:15 2023 -0600
+
+    first commit
+
+ lolo | 1 <span style="color:#4E9A06">+</span>
+ 1 file changed, 1 insertion(+)
+[fmp@fedora git-notes]$ echo &quot;loli&quot; &gt; loli
+[fmp@fedora git-notes]$ git status
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	<span style="color:#CC0000">modified:   lolo</span>
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">loli</span>
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+[fmp@fedora git-notes]$ git add loli
+[fmp@fedora git-notes]$ git status
+On branch master
+Changes to be committed:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+	<span style="color:#4E9A06">new file:   loli</span>
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	<span style="color:#CC0000">modified:   lolo</span>
+
+[fmp@fedora git-notes]$ git restore --staged loli
+[fmp@fedora git-notes]$ git status
+On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+	<span style="color:#CC0000">modified:   lolo</span>
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">loli</span>
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+[fmp@fedora git-notes]$ git restore lolo
+[fmp@fedora git-notes]$ git status
+On branch master
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+	<span style="color:#CC0000">loli</span>
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+[fmp@fedora git-notes]$ cat lolo lola loli
+lolo
+lola
+new line
+loli
+</pre>
